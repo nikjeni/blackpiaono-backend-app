@@ -3,10 +3,10 @@ const { Page } = require('../models/pages-model');
 module.exports.createPage = async (req, res, next) => {
     try {
         var page = new Page({
-            title: req.title,
-            content: req.content,
-            keywords: req.keywords,
-            createdBy: req.createdBy
+            title: req.body.title,
+            content: req.body.content,
+            keywords: req.body.keywords,
+            createdBy: req.body.createdBy
         })
         await page.save();
         return res.send({ message: 'Page has been created successfully', status: 200 });
@@ -17,7 +17,7 @@ module.exports.createPage = async (req, res, next) => {
 
 module.exports.deletePage = async (req, res, next) => {
     try {
-        await Page.deleteOne({ _id: req.params.id });
+        await Page.deleteOne({ _id: req.query.pageId });
         return res.send({ message: 'Page deleted successfully' });
     } catch (err) {
         return res.send({ message: 'Deletion failed', status: 400 });
