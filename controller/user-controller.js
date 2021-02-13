@@ -24,13 +24,14 @@ module.exports.register = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
     try {
         var user = await User.find({ email: req.body.email }).lean();
+        console.log(user);
         if (user) {
-            brcypt.compare(req.body.password, user.hash, function (err, result) {
+            brcypt.compare(req.body.password, user[0].password, function (err, result) {
                 if (result) {
                     var token = jwt.sign(req.body, config.mysecretkey, { expiresIn: '1h' });
                     return res.send({ 'message': 'Successfully Authenticated', token: token, status: 200 });
                 } else {
-                    return res.send({ 'message': 'Invalid valid', status: 400 });
+                    return res.send({ 'message': 'Invalid user', status: 400 });
                 }
             })
         } else {
