@@ -1,2 +1,2 @@
-Execute below command on terminal
+Execute command on terminal =>
 npm start
