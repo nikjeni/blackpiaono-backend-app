@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 const config = require('../config.json');
 module.exports.auth = (req, res, next) => {
     try {
-        var decoded = jwt.verify(token, config.mysecretkey);
+        var decoded = jwt.verify(req.headers.authorization, config.mysecretkey);
         console.log("decoded", decoded);
-        if (decoded) {
+        if (decoded.email == req.body.email) {
             next();
         } else {
             return res.send({ 'message': 'Invalid user', status: 400 });

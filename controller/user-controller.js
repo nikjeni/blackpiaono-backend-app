@@ -56,11 +56,10 @@ module.exports.deleteUser = async (req, res, next) => {
 //Update User
 module.exports.updateUser = async (req, res, next) => {
     try {
-        await User.updateOne({ _id: req.body._id, email: req.body.email }, {
+        await User.updateOne({ _id: req.body.userId }, {
             $set: {
                 name: req.body.name,
                 status: req.body.status,
-                password: req.body.password,
                 email: req.body.email
             }
         })
