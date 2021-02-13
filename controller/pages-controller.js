@@ -6,7 +6,7 @@ module.exports.createPage = async (req, res, next) => {
             title: req.title,
             content: req.content,
             keywords: req.keywords,
-            createdBy: req.userId
+            createdBy: req.createdBy
         })
         await page.save();
         return res.send({ message: 'Page has been created successfully', status: 200 });
