@@ -1,1 +1,2 @@
-# blackpiaono-backend-app
+Execute below command on terminal
+npm start
