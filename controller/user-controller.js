@@ -45,8 +45,9 @@ module.exports.login = async (req, res, next) => {
 
 //Delete user
 module.exports.deleteUser = async (req, res, next) => {
+    console.log(req);
     try {
-        await User.deleteOne({ _id: req.params.id });
+        await User.deleteOne({ _id: req.query.userId });
         return res.send({ 'message': 'User deleted successfully', status: 200 });
     } catch (err) {
         return res.send({ 'message': 'Server error', status: 501 });
@@ -59,8 +60,7 @@ module.exports.updateUser = async (req, res, next) => {
         await User.updateOne({ _id: req.body.userId }, {
             $set: {
                 name: req.body.name,
-                status: req.body.status,
-                email: req.body.email
+                status: req.body.status
             }
         })
         return res.send({ 'message': 'User details updated successfully', status: 200 });
